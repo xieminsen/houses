@@ -5,7 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-@Configuration
+/**
+ * 是用来调整上边两个拦截
+ * @author xie
+ *
+ */
+@Configuration//添加为springbean
 public class WebMvcConf extends WebMvcConfigurerAdapter {
 
 	@Autowired

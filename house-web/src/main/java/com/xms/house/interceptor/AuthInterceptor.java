@@ -28,7 +28,7 @@ public class AuthInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
+		//使用GetMap获取前端传来的所有数据
 		Map<String, String[]> map = request.getParameterMap();
 		map.forEach((k,v) -> {
 			if (k.equals("errorMsg") || k.equals("successMsg") || k.equals("target")) {

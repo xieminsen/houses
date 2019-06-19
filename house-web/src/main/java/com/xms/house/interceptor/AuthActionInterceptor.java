@@ -11,7 +11,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.xms.house.entity.User;
 
-
+/**
+ * 鉴权2配置
+ * @author xie
+ *
+ */
 @Component
 public class AuthActionInterceptor implements HandlerInterceptor {
 

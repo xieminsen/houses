@@ -115,10 +115,26 @@ public class UserService {
 		    });
 		    return list;
 		  }
+	  
 	  //更新用户密码操作
 	  public void updateUser(User updateUser, String email) {
 		    updateUser.setEmail(email);
 		    BeanHelper.onUpdate(updateUser);
 		    userMapper.update(updateUser);
+		  }
+	  
+	  /**
+	   * 根据id查询用户
+	   * @param id
+	   * @return
+	   */
+	  public User getUserById(Long id) {
+		    User queryUser = new User();
+		    queryUser.setId(id);
+		    List<User> users = getUserByQuery(queryUser);
+		    if (!users.isEmpty()) {
+		      return users.get(0);
+		    }
+		    return null;
 		  }
 }

@@ -154,7 +154,7 @@
       enable,
       agency_id
    </sql>
-    <select id="selectAgent" resultMap="BaseResultMap" >
+    <select id="selectAgent" resultType="com.xms.house.entity.User" >
      select * from user
      <where>
        enable = 1 and type = 2

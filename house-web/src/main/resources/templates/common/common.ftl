@@ -44,8 +44,8 @@
                                 <h3>联系方式</h3>
                                 <address>
                                     <strong>公司地址</strong><br>
-                                    北京西直门<br>
-                                    奋斗大厦B座3层
+                                    北京昌平区<br>
+                                   沙河高教大楼4-242s
                                 </address>
                                 010-87111111<br>
                                 <a href="#">hello@example.com</a>

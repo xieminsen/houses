@@ -115,7 +115,10 @@ public class UserService {
 		    });
 		    return list;
 		  }
-	  public static void main(String[] args) {
-		  System.out.println("1093499c0b78e3a3447b03646849ae16");
-	}
+	  //更新用户密码操作
+	  public void updateUser(User updateUser, String email) {
+		    updateUser.setEmail(email);
+		    BeanHelper.onUpdate(updateUser);
+		    userMapper.update(updateUser);
+		  }
 }

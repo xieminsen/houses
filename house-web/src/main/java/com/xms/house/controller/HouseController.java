@@ -95,10 +95,11 @@ public class HouseController {
 	@RequestMapping("house/detail")
 	public String houseDetail(Long id,ModelMap modelMap){
 		House house = houseService.queryOneHouse(id);//获取房屋详情
-	    HouseUser houseUser = houseService.getHouseUser(id);
-	    recommendService.increase(id);
+	    HouseUser houseUser = houseService.getHouseUser(id);//获取房屋及经纪人关联
+	    recommendService.increase(id);//redis操作
 	    List<Comment> comments = commentService.getHouseComments(id,8);
 		if (houseUser.getUserId() != null && !houseUser.getUserId().equals(0)) {
+			//如果经纪人不为空 添加modelMap
 			modelMap.put("agent", agencyService.getAgentDeail(houseUser.getUserId()));
 		}
 	    List<House> rcHouses =  recommendService.getHotHouse(CommonConstants.RECOM_SIZE);
@@ -108,10 +109,15 @@ public class HouseController {
 		return "/house/detail";
 	}
 	
+	/**
+	 * 留言功能
+	 * @param userMsg
+	 * @return
+	 */
 	@RequestMapping("house/leaveMsg")
 	public String houseMsg(UserMsg userMsg){
 	  houseService.addUserMsg(userMsg);
-	  return "redirect:/house/detail?id=" + userMsg.getHouseId() + ResultMsg.successMsg("留言成功").asUrlParams();
+	  return "redirect:/house/detail?id=" + userMsg.getHouseId() ;//+ ResultMsg.successMsg("留言成功").asUrlParams()
 	}
 	
 	//1.评分

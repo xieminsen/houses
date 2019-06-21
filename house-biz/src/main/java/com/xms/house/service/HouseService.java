@@ -119,6 +119,11 @@ public class HouseService {
 		return houseUser;
 	}
 	
+	/**
+	 * 获取房屋信息
+	 * @param id
+	 * @return
+	 */
 	public House queryOneHouse(Long id) {
 		House query = new House();
 		query.setId(id);
@@ -129,6 +134,10 @@ public class HouseService {
 		return null;
 	}
 
+	/**
+	 *  添加留言
+	 * @param userMsg
+	 */
 	public void addUserMsg(UserMsg userMsg) {
         BeanHelper.onInsert(userMsg);
         houseMapper.insertUserMsg(userMsg);

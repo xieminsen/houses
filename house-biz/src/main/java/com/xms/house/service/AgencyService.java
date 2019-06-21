@@ -30,10 +30,10 @@ public class AgencyService {
    */
   public User getAgentDeail(Long userId) {
     User user = new User();
-    user.setId(userId);
-    user.setType(2);
+    user.setId(userId);//用户id
+    user.setType(2);//用户类型
     List<User> list = agencyMapper.selectAgent(user, PageParams.build(1, 1));
-    setImg(list);
+    setImg(list);//循环处理用户头像+路径
     if (!list.isEmpty()) {
       User agent = list.get(0);
       //将经纪人关联的经纪机构也一并查询出来

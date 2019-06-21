@@ -16,16 +16,20 @@ import com.xms.house.page.PageParams;
 
 import redis.clients.jedis.Jedis;
 
+/*
+ * redis连接
+ */
 @Service
 public class RecommendService {
 
-  private static final String HOT_HOUSE_KEY = "hot_house";
+  private static final String HOT_HOUSE_KEY = "hot_house";//设置iredis名称
 
-  private static final Logger logger = LoggerFactory.getLogger(RecommendService.class);
+  private static final Logger logger = LoggerFactory.getLogger(RecommendService.class);//日志
 
   @Autowired
   private HouseService houseService;
 
+  //初始化redis连接定义
   public void increase(Long id) {
     try {
       Jedis jedis = new Jedis("127.0.0.1");
@@ -38,6 +42,7 @@ public class RecommendService {
    
   }
 
+  //返回热门房产id
   public List<Long> getHot() {
     try {
       Jedis jedis = new Jedis("127.0.0.1");
@@ -61,7 +66,9 @@ public class RecommendService {
     }
     query.setIds(list);
     final List<Long> order = list;
+    //查询房产列表
     List<House> houses = houseService.queryAndSetImg(query, PageParams.build(size, 1));
+    //排序
     Ordering<House> houseSort = Ordering.natural().onResultOf(hs -> {
       return order.indexOf(hs.getId());
     });

@@ -12,7 +12,6 @@ import com.xms.house.entity.Comment;
 import com.xms.house.entity.User;
 import com.xms.house.util.BeanHelper;
 
-
 @Service
 public class CommentService {
   

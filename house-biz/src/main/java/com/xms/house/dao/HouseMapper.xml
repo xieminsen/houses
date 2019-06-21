@@ -60,20 +60,6 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   
-  <insert id="insert" parameterType="com.xms.house.entity.House">
-    insert into house (id, name, type, price, 
-      images, area, beds, 
-      baths, rating, remarks, 
-      properties, floor_plan, tags, 
-      create_time, city_id, community_id, 
-      address, state)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=BIT}, #{price,jdbcType=INTEGER}, 
-      #{images,jdbcType=VARCHAR}, #{area,jdbcType=INTEGER}, #{beds,jdbcType=INTEGER}, 
-      #{baths,jdbcType=INTEGER}, #{rating,jdbcType=DOUBLE}, #{remarks,jdbcType=VARCHAR}, 
-      #{properties,jdbcType=VARCHAR}, #{floorPlan,jdbcType=VARCHAR}, #{tags,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{cityId,jdbcType=INTEGER}, #{communityId,jdbcType=INTEGER}, 
-      #{address,jdbcType=VARCHAR}, #{state,jdbcType=BIT})
-  </insert>
   
   <insert id="insertSelective" parameterType="com.xms.house.entity.House">
     insert into house
@@ -377,7 +363,46 @@
       set    state = 2
       where  id = #{id}
     </update>
-   
+      <insert id="insert"  useGeneratedKeys="true" keyProperty="id">
+     insert into house(
+                     type,
+                     name,
+                     price,
+                     images,
+                     area,
+                     beds,
+                     baths,
+                     rating,
+                     remarks,
+                     properties,
+                     floor_plan,
+                     tags,
+                     create_time,
+                     city_id,
+                     community_id,
+                     address,
+                     state
+                  )
+                 value(
+                     #{type},
+                     #{name},
+                     #{price},
+                     #{images},
+                     #{area},
+                     #{beds},
+                     #{baths},
+                     #{rating},
+                     #{remarks},
+                     #{properties},
+                     #{floorPlan},
+                     #{tags},
+                     #{createTime},
+                     #{cityId},
+                     #{communityId},
+                     #{address},
+                     #{state}
+                     )
+   </insert>
 
    
    <insert id="insertHouseUser">

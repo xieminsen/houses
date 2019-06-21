@@ -88,18 +88,24 @@ public class HouseService {
 	 */
 	public void addHouse(House house, User user) {
 		if (CollectionUtils.isNotEmpty(house.getHouseFiles())) {
-			String images = Joiner.on(",").join(fileService.getImgPaths(house.getHouseFiles()));
-		    house.setImages(images);
+			String images = Joiner.on(",").join(fileService.getImgPaths(house.getHouseFiles()));//多个图片转化字符串
+		    house.setImages(images);//直接注入
 		}
 		if (CollectionUtils.isNotEmpty(house.getFloorPlanFiles())) {
 			String images = Joiner.on(",").join(fileService.getImgPaths(house.getFloorPlanFiles()));
 		    house.setFloorPlan(images);
 		}
-		BeanHelper.onInsert(house);
+		BeanHelper.onInsert(house);//设置默认值
 		houseMapper.insert(house);
 		bindUser2House(house.getId(),user.getId(),false);
 	}
 
+	/**
+	 *  插入房产信息关联人
+	 * @param houseId
+	 * @param userId
+	 * @param collect
+	 */
 	public void bindUser2House(Long houseId, Long userId, boolean collect) {
       HouseUser existhouseUser =     houseMapper.selectHouseUser(userId,houseId,collect ? HouseUserType.BOOKMARK.value : HouseUserType.SALE.value);
 	  if (existhouseUser != null) {
@@ -108,12 +114,16 @@ public class HouseService {
 	  HouseUser houseUser = new HouseUser();
 	  houseUser.setHouseId(houseId);
 	  houseUser.setUserId(userId);
+	  System.out.println("houseId........................"+houseId);
 	  houseUser.setType(collect ? HouseUserType.BOOKMARK.value : HouseUserType.SALE.value);
 	  BeanHelper.setDefaultProp(houseUser, HouseUser.class);
 	  BeanHelper.onInsert(houseUser);
 	  houseMapper.insertHouseUser(houseUser);
 	}
 
+	
+
+	
 	public HouseUser getHouseUser(Long houseId){
 		HouseUser houseUser =  houseMapper.selectSaleHouseUser(houseId);
 		return houseUser;

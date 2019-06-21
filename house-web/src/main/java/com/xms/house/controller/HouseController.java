@@ -67,7 +67,11 @@ public class HouseController {
 		modelMap.put("communitys", houseService.getAllCommunitys());
 		return "/house/add";
 	}
-	
+	/**
+	 * 添加房屋
+	 * @param house
+	 * @return
+	 */
 	@RequestMapping("/house/add")
 	public String doAdd(House house){
 		User user = UserContext.getUser();
@@ -78,9 +82,10 @@ public class HouseController {
 	
 	@RequestMapping("house/ownlist")
 	public String ownlist(House house,Integer pageNum,Integer pageSize,ModelMap modelMap){
-		User user = UserContext.getUser();
+		User user = UserContext.getUser();//获取当前用户查询
 		house.setUserId(user.getId());
 		house.setBookmarked(false);
+		//查询个人名下的房产信息
 		modelMap.put("ps", houseService.queryHouse(house, PageParams.build(pageSize, pageNum)));
 		modelMap.put("pageType", "own");
 		return "/house/ownlist";

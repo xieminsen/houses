@@ -42,16 +42,17 @@
 		<scope>test</scope>
 	 </dependency>
 	 
-	 <!-- boot的启动迭代器 -->
+	 <!-- boot的启动监控器 -->
 	 <dependency>
 	    <groupId>org.springframework.boot</groupId>
 	    <artifactId>spring-boot-starter-actuator</artifactId>
      </dependency>
      
+     <!-- 监控客户端依赖 与下边的springadmin项目集成 -->
       <dependency>
         <groupId>de.codecentric</groupId>
         <artifactId>spring-boot-admin-starter-client</artifactId>
-        <version>1.5.0</version>
+        <version>1.5.2</version>
      </dependency>
 
 	<!-- boot的启动类 -->
